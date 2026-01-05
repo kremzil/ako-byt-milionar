@@ -1,0 +1,17 @@
+---
+import { Image } from "astro:assets";
+import bg from "../assets/piggyBank.jpeg";
+---
+<section class="relative min-h-96 w-full overflow-hidden rounded-b-lg">
+  <Image
+    src={bg}
+    alt="Piggy bank with coins"
+    class="absolute inset-0 h-full w-full object-cover object-center"
+    sizes="100vw"
+    loading="eager"
+    priority
+  />
+  <div class="absolute inset-8 flex items-center justify-center">
+    <h1 class="">Ako efektívne zhodnotiť svoje úspory</h1>
+  </div>
+</section>
