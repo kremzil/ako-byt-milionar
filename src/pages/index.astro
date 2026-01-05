@@ -9,31 +9,31 @@ import chartBg from "../assets/chartBg.jpeg";
 
 <BaseLayout>
 <!-- HERO + big image card -->
-<section class="bg-slate-50">
+<section class="bg-neutral-50">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
     <!-- top text row -->
     <div class="pt-12 lg:pt-16">
       <div class="grid gap-8 lg:grid-cols-12 lg:items-start">
         <!-- left -->
         <div class="lg:col-span-7">
-          <p class="text-xs font-semibold tracking-widest text-slate-500">
+          <p class="text-xs font-semibold tracking-widest text-neutral-500">
             ZAČNITE TERAZ
           </p>
 
-          <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+          <h1 class="mt-3 text-neutral-900">
             Ako efektívne zhodnotiť svoje úspory
           </h1>
         </div>
 
         <!-- right -->
         <div class="lg:col-span-5 lg:pt-1">
-          <p class="text-sm leading-6 text-slate-600">
+          <p class="text-neutral-600">
             Objavte, ako vaše úspory môžu rásť s pravidelnými investíciami a trpezlivosťou.
           </p>
 
           <a
             href="#"
-            class="mt-4 inline-flex items-center justify-center rounded-md bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700"
+            class="mt-4 inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-accent/90 hover:no-underline"
           >
             Zistite Viac
           </a>
@@ -73,16 +73,16 @@ import chartBg from "../assets/chartBg.jpeg";
       </div>
 
       <div class="lg:col-span-7 lg:pl-10">
-        <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+        <h2 class="text-neutral-900">
           Príbehy úspechu a cenné skúsenosti
         </h2>
-        <p class="mt-4 text-sm leading-6 text-slate-600">
+        <p class="mt-4 text-neutral-600">
           Pozrite sa, ako sa slovenským miliardárom podarilo dosiahnuť úspech a čo sa môžete naučiť z ich ciest k bohatstvu.
 Objavte aj príbehy, ktoré ukazujú, na čo si dať pozor pri správe financií a investovaní. </p>
 		<p>
 			<strong>Nechajte sa inšpirovať a urobte múdre rozhodnutia pre svoju budúcnosť.</strong>
         </p>
-        <a class="mt-6 inline-flex rounded-md bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700" href="#">
+        <a class="mt-6 inline-flex rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white no-underline hover:bg-accent/90 hover:no-underline" href="#">
           Čítať Viac
         </a>
       </div>
@@ -90,25 +90,25 @@ Objavte aj príbehy, ktoré ukazujú, na čo si dať pozor pri správe financií
   </div>
 </section>
 
-<section class="relative isolate h-[calc(100vh-200px)] mt-16 mb-24">
+<section class="relative isolate h-[calc(100vh-100)] md:h-[calc(100vh-400px)] mt-16 mb-24">
   {/* Background */}
   <div class="absolute inset-0 -z-10">
     <Image src={chartBg} alt="" width={2400} class="h-full w-full object-cover" />
-    <div class="absolute inset-0 bg-slate-900/60"></div>
+    <div class="absolute inset-0 bg-neutral-900/70"></div>
   </div>
 
   {/* Teal banner: half outside */}
   <div class="absolute left-1/2 top-0 w-full max-w-5xl -translate-x-1/2 -translate-y-1/2 px-4 sm:px-6">
-    <div class="rounded-2xl bg-teal-600 px-8 py-8 shadow-xl ring-1 ring-black/10">
+    <div class="rounded-2xl bg-accent px-8 py-8 shadow-xl ring-1 ring-black/10">
       <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-        <h3 class="text-3xl font-extrabold tracking-tight text-white">
+        <h3 class="text-white">
           Začnite investovať ešte dnes!
         </h3>
 
         <a
           href="#"
           class="inline-flex items-center justify-center rounded-md bg-white px-6 py-2.5
-                 text-sm font-semibold text-slate-900 hover:bg-white/90"
+                 text-sm font-semibold text-neutral-900 no-underline hover:bg-white/90 hover:no-underline"
         >
           Zistite Viac
         </a>
@@ -122,7 +122,7 @@ Objavte aj príbehy, ktoré ukazujú, na čo si dať pozor pri správe financií
       <div class="text-center">
         <p class="text-xs font-semibold tracking-widest text-white/80">NAŠA VÝHODA</p>
 
-        <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+        <h2 class="mt-4 text-white">
           Jednoduché a prehľadné<br class="hidden sm:block" />
           možnosti investovania
         </h2>
@@ -131,40 +131,40 @@ Objavte aj príbehy, ktoré ukazujú, na čo si dať pozor pri správe financií
       <div class="mt-12 grid gap-10 text-center sm:grid-cols-2 lg:grid-cols-3">
         <!-- item -->
         <div class="mx-auto max-w-xs">
-          <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-teal-600">
+          <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-accent">
             <svg viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-white">
               <path fill-rule="evenodd" d="M16.704 5.29a1 1 0 01.006 1.414l-7.07 7.09a1 1 0 01-1.42.003L3.29 8.86a1 1 0 011.42-1.41l3.2 3.22 6.36-6.38a1 1 0 011.414-.006z" clip-rule="evenodd"/>
             </svg>
           </div>
-          <h3 class="mt-4 text-lg font-extrabold text-white">Nástroje</h3>
+          <h3 class="mt-4 text-white">Nástroje</h3>
           <p class="mt-3 text-sm leading-6 text-white/80">
-            Naša platforma ponúka intuitívne nástroje na...
+            Naša platforma ponúka intuitívne nástroje na pripočítanie úrokov, ktoré zjednodušujú proces investovania.
           </p>
         </div>
 
         <!-- item -->
         <div class="mx-auto max-w-xs">
-          <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-teal-600">
+          <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-accent">
             <svg viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-white">
               <path fill-rule="evenodd" d="M16.704 5.29a1 1 0 01.006 1.414l-7.07 7.09a1 1 0 01-1.42.003L3.29 8.86a1 1 0 011.42-1.41l3.2 3.22 6.36-6.38a1 1 0 011.414-.006z" clip-rule="evenodd"/>
             </svg>
           </div>
-          <h3 class="mt-4 text-lg font-extrabold text-white">Inšpiratívne príbehy</h3>
+          <h3 class="mt-4 text-white">Inšpiratívne príbehy</h3>
           <p class="mt-3 text-sm leading-6 text-white/80">
-            Prečítajte si úspešné príbehy...
+            Prečítajte si úspešné príbehy iných, ktorí dosiahli svoje ciele pomocou múdrych investícií.
           </p>
         </div>
 
         <!-- item -->
         <div class="mx-auto max-w-xs">
-          <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-teal-600">
+          <div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-accent">
             <svg viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-white">
               <path fill-rule="evenodd" d="M16.704 5.29a1 1 0 01.006 1.414l-7.07 7.09a1 1 0 01-1.42.003L3.29 8.86a1 1 0 011.42-1.41l3.2 3.22 6.36-6.38a1 1 0 011.414-.006z" clip-rule="evenodd"/>
             </svg>
           </div>
-          <h3 class="mt-4 text-lg font-extrabold text-white">Vzdelávacie materiály</h3>
+          <h3 class="mt-4 text-white">Vzdelávacie materiály</h3>
           <p class="mt-3 text-sm leading-6 text-white/80">
-            Ponúkame jednoduché vzdelávacie zdroje...
+            Ponúkame jednoduché vzdelávacie zdroje, aby ste mohli lepšie porozumieť svetu investovania.
           </p>
         </div>
       </div>
