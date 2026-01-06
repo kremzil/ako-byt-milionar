@@ -6,6 +6,7 @@ import { Image } from "astro:assets";
 import hero from "../assets/piggyBank.jpeg";
 import guy from "../assets/menWithTablet.jpg";
 import chartBg from "../assets/chartBg.jpeg";
+import calculator from "../assets/calculator.jpeg";
 
 const testimonials = [
   {
@@ -110,7 +111,7 @@ Objavte aj príbehy, ktoré ukazujú, na čo si dať pozor pri správe financií
   </div>
 </section>
 
-<section class="relative isolate h-[calc(100vh-100)] md:h-[calc(100vh-400px)] mt-16 mb-24">
+<section class="relative isolate mt-16 mb-24">
   {/* Background */}
   <div class="absolute inset-0 -z-10">
     <Image src={chartBg} alt="" width={2400} class="h-full w-full object-cover" />
@@ -213,4 +214,21 @@ Objavte aj príbehy, ktoré ukazujú, na čo si dať pozor pri správe financií
   </div>
 </section>
 
+<section class="relative isolate  min-h-72">
+  {/* Background */}
+  <div class="absolute inset-0 -z-10">
+    <Image src={calculator} alt="" width={2400} class="h-full w-full object-cover" />
+    <div class="absolute inset-0 bg-neutral-900/70"></div>
+  </div>
+  <div class="mx-auto max-w-6xl px-4 py-32 sm:px-6">
+    <div class="text-center">
+      <h2 class="text-white">
+        Pripojte sa k našej komunite dnes!
+      </h2>
+      <p class="mt-4 text-white/80">
+        Začnite svoju cestu k finančnej slobode s Ako byť milionár.
+      </p>
+
+    </div>
+</section>
 </BaseLayout>

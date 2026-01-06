@@ -8,6 +8,8 @@
 }
 
 @layer base {
+  html { scroll-behavior: smooth; }
+  html { font-size: 110%; }
   body { @apply font-sans text-base leading-relaxed text-neutral-900; }
   h1 { @apply font-serif text-4xl md:text-5xl font-normal tracking-tight; }
   h2 { @apply font-serif text-3xl md:text-4xl font-normal tracking-tight; }
