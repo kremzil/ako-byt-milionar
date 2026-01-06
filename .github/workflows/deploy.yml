@@ -1,3 +1,4 @@
+# .github/workflows/deploy.yml
 name: Build & Deploy Astro
 
 on:
@@ -11,7 +12,6 @@ concurrency:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,18 +22,20 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install dependencies
+      - name: Install deps
         run: npm ci
 
       - name: Build
         run: npm run build
 
-      - name: Deploy dist to Websupport
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: akobytmilionar.sk
-          port: 22
-          username: ${{ secrets.SFTP_USER }}
-          password: ${{ secrets.SFTP_PASS }}
-          source: "dist/*"
-          target: "akobytmilionar.sk/web"
+- name: Deploy dist via SFTP
+  uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+  with:
+    server: akobytmilionar.sk
+    port: 22
+    username: ${{ secrets.SFTP_USER }}
+    password: ${{ secrets.SFTP_PASS }}
+    sftp_only: true
+    local_path: ./dist/
+    remote_path: akobytmilionar.sk/web
+    delete_remote_files: false
