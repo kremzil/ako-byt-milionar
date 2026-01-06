@@ -3,11 +3,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout pageTitle="O nás">
-  <main class="bg-[#f6f7f6]">
-    <section class="mx-auto max-w-6xl px-4 pb-20 pt-12 sm:px-6 lg:pt-16">
+  <main class="surface">
+    <section class="page-container pb-20 pt-12 lg:pt-16">
       <div class="grid gap-10 lg:grid-cols-[1.1fr,0.9fr] lg:items-start">
-        <div class="rounded-3xl bg-white px-6 py-10 shadow-sm ring-1 ring-black/5 sm:px-10">
-          <p class="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
+        <div class="card-lg px-6 py-10 sm:px-10">
+          <p class="eyebrow text-xs text-neutral-500">
             O nás
           </p>
 
@@ -23,7 +23,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
           <p class="mt-6 text-base leading-7 text-neutral-700">
             Sme súčasť ekosystému ANKL Cap (
-            <a class="text-accent no-underline hover:underline" href="https://anklcap.sk">
+            <a class="link-accent" href="https://anklcap.sk">
               anklcap.sk
             </a>
             ) a čerpáme z reálnych skúseností s budovaním firiem, investíciami a riadením projektov.
@@ -42,7 +42,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             Každé rozhodnutie si overte podľa vlastnej situácie.
           </p>
 
-          <div class="mt-8 rounded-2xl bg-neutral-50 px-5 py-5 ring-1 ring-black/5">
+          <div class="panel mt-8 bg-neutral-50 px-5 py-5">
             <p class="text-sm font-semibold text-neutral-900">Čo tu nájdete</p>
             <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-neutral-700">
               <li><strong>Jednoduché vysvetlenia</strong> pojmov a princípov bez zbytočného balastu.</li>
@@ -52,7 +52,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </ul>
           </div>
 
-          <div class="mt-6 rounded-2xl bg-white px-5 py-5 ring-1 ring-black/5">
+          <div class="panel mt-6 bg-white px-5 py-5">
             <p class="text-sm font-semibold text-neutral-900">Ako k témam pristupujeme</p>
             <p class="mt-2 text-sm leading-6 text-neutral-700">
               Preferujeme dlhodobé princípy pred “horúcimi tipmi”. Ak niečo odporúčame ako koncept,
@@ -62,13 +62,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
 
         <div class="space-y-6">
-          <div class="rounded-3xl bg-white px-6 py-8 shadow-sm ring-1 ring-black/5 sm:px-8">
+          <div class="card-lg px-6 py-8 sm:px-8">
             <h2 class="text-xl font-semibold text-neutral-900">ANKL Cap</h2>
             <p class="mt-3 text-sm leading-6 text-neutral-600">
               Ekosystém projektov zameraný na dlhodobú hodnotu, podnikanie a rozvoj know-how.
             </p>
             <a
-              class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent no-underline hover:underline"
+              class="link-accent mt-5 inline-flex items-center gap-2 text-sm font-semibold"
               href="https://anklcap.sk"
             >
               Navštíviť anklcap.sk
@@ -76,7 +76,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </a>
           </div>
 
-          <div class="rounded-3xl bg-white px-6 py-8 shadow-sm ring-1 ring-black/5 sm:px-8">
+          <div class="card-lg px-6 py-8 sm:px-8">
             <h2 class="text-xl font-semibold text-neutral-900">Kontakt</h2>
             <p class="mt-3 text-sm leading-6 text-neutral-600">
               Orlia 10, Košice

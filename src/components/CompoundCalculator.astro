@@ -8,10 +8,10 @@ const { id="kalkulacka" } = Astro.props;
 ---
 
 <section id={id} class="bg-white">
-  <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:py-20">
+  <div class="page-container-narrow py-16 lg:py-20">
     <div class="flex items-baseline justify-between border-b border-neutral-200 pb-4">
       <h2 class="text-neutral-900">Kalkulačka zloženého úročenia</h2>
-      <span class="text-xs uppercase tracking-widest text-neutral-500">EUR</span>
+      <span class="eyebrow text-xs text-neutral-500">EUR</span>
     </div>
 
     <div class="mt-10 grid gap-10 lg:grid-cols-12">
@@ -92,10 +92,7 @@ const { id="kalkulacka" } = Astro.props;
           </select>
         </label>
 
-        <button
-          type="submit"
-          class="inline-flex items-center justify-center rounded-md bg-accent px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-accent/90"
-        >
+        <button type="submit" class="button-primary">
           Výpočet
         </button>
       </form>

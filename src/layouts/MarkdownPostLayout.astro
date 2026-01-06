@@ -17,9 +17,9 @@ const image = imageModule?.default ?? null;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <main class="bg-[#f6f7f6] pt-20 pb-16 ">
-    <article class=" mx-auto max-w-170 rounded-2xl bg-white px-4 pb-12 pt-10 shadow-sm ring-1 ring-black/5 sm:px-6 sm:pb-16 lg:pt-16">
-      <div class="text-xs uppercase tracking-[0.25em] text-neutral-500">
+  <main class="surface pt-20 pb-16">
+    <article class="card mx-auto max-w-170 px-4 pb-12 pt-10 sm:px-6 sm:pb-16 lg:pt-16">
+      <div class="eyebrow text-xs text-neutral-500">
         {frontmatter.pubDate.toString().slice(0, 10)}
       </div>
       <h1 class="mt-4 text-4xl font-normal tracking-tight text-neutral-900 sm:text-5xl">
@@ -28,12 +28,12 @@ const image = imageModule?.default ?? null;
       {frontmatter.description && (
         <p class="mt-4 text-lg text-neutral-600">{frontmatter.description}</p>
       )}
-      <p class="mt-3 text-sm uppercase tracking-[0.2em] text-neutral-500">
+      <p class="eyebrow mt-3 text-sm text-neutral-500">
         Autor: <span class="text-neutral-700">{frontmatter.author}</span>
       </p>
 
       {image && (
-        <div class="mt-8 overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-black/5">
+        <div class="card mt-8 overflow-hidden shadow-lg">
           <Image
             src={image}
             width={1200}
