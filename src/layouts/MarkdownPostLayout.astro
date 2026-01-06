@@ -1,0 +1,52 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { Image } from "astro:assets";
+
+const { frontmatter } = Astro.props;
+const blogImages = import.meta.glob("../assets/blog/*.{png,jpg,jpeg,webp,avif}", {
+  eager: true,
+});
+const imagePath = frontmatter.image?.src ?? frontmatter.image?.url;
+const imageKey = imagePath?.startsWith("../assets/")
+  ? imagePath
+  : imagePath
+    ? `../assets/blog/${imagePath.split("/").pop()}`
+    : null;
+const imageModule = imageKey ? blogImages[imageKey] : null;
+const image = imageModule?.default ?? null;
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+  <main class="bg-[#f6f7f6] pt-20 pb-16 ">
+    <article class=" mx-auto max-w-170 rounded-2xl bg-white px-4 pb-12 pt-10 shadow-sm ring-1 ring-black/5 sm:px-6 sm:pb-16 lg:pt-16">
+      <div class="text-xs uppercase tracking-[0.25em] text-neutral-500">
+        {frontmatter.pubDate.toString().slice(0, 10)}
+      </div>
+      <h1 class="mt-4 text-4xl font-normal tracking-tight text-neutral-900 sm:text-5xl">
+        {frontmatter.title}
+      </h1>
+      {frontmatter.description && (
+        <p class="mt-4 text-lg text-neutral-600">{frontmatter.description}</p>
+      )}
+      <p class="mt-3 text-sm uppercase tracking-[0.2em] text-neutral-500">
+        Autor: <span class="text-neutral-700">{frontmatter.author}</span>
+      </p>
+
+      {image && (
+        <div class="mt-8 overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-black/5">
+          <Image
+            src={image}
+            width={1200}
+            sizes="(min-width: 1024px) 768px, 100vw"
+            alt={frontmatter.image?.alt ?? frontmatter.title}
+            class="h-72 w-full object-cover sm:h-96"
+          />
+        </div>
+      )}
+
+      <div class="mt-10 space-y-6 text-[1.05rem] leading-8 text-neutral-800 [&_h2]:mt-12 [&_h2]:text-3xl [&_h2]:font-normal [&_h3]:mt-8 [&_h3]:text-2xl [&_h3]:font-normal [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_blockquote]:border-l-4 [&_blockquote]:border-accent [&_blockquote]:pl-4 [&_blockquote]:text-neutral-600 [&_a]:text-accent [&_a]:underline-offset-4 [&_a]:hover:underline">
+        <slot />
+      </div>
+    </article>
+  </main>
+</BaseLayout>

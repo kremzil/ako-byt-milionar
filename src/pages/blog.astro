@@ -1,0 +1,133 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+
+const posts = await Astro.glob("./posts/*.md");
+const blogImages = import.meta.glob("../assets/blog/*.{png,jpg,jpeg,webp,avif}", {
+  eager: true,
+});
+
+const getDate = (value) => {
+  if (!value) return null;
+  if (value instanceof Date) return value;
+  const raw = String(value);
+  const parts = raw.split("-");
+  if (parts.length === 3 && parts[0].length <= 2) {
+    const [day, month, year] = parts;
+    return new Date(`${year}-${month}-${day}`);
+  }
+  const parsed = new Date(raw);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+};
+
+const formatDate = (value) => {
+  const parsed = getDate(value);
+  if (!parsed) return value ? String(value) : "";
+  return new Intl.DateTimeFormat("sk-SK", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(parsed);
+};
+
+const resolveImage = (imageData) => {
+  const imagePath = imageData?.src ?? imageData?.url;
+  if (!imagePath) return null;
+  const fileName = imagePath.split("/").pop();
+  if (!fileName) return null;
+  const imageKey = `../assets/blog/${fileName}`;
+  const imageModule = blogImages[imageKey];
+  return imageModule?.default ?? null;
+};
+
+const getExcerpt = (post) => {
+  const description = post.frontmatter?.description?.trim();
+  if (description) return description;
+  if (typeof post.rawContent !== "function") return "";
+  const raw = post.rawContent();
+  const paragraph = raw.split(/\n\s*\n/).find((chunk) => chunk.trim());
+  if (!paragraph) return "";
+  return paragraph.replace(/\n/g, " ").trim().slice(0, 180);
+};
+
+const cards = posts
+  .map((post) => ({
+    post,
+    image: resolveImage(post.frontmatter?.image),
+    excerpt: getExcerpt(post),
+    date: getDate(post.frontmatter?.pubDate),
+  }))
+  .sort((a, b) => (b.date?.getTime() ?? 0) - (a.date?.getTime() ?? 0));
+---
+
+<BaseLayout pageTitle="Blog">
+  <main class="relative overflow-hidden bg-[#f6f7f6]">
+    <div class="pointer-events-none absolute inset-0 -z-10">
+      <div class="absolute -left-20 top-10 h-64 w-64 rounded-full bg-[#dff3f3] blur-3xl opacity-70" />
+      <div class="absolute right-0 top-60 h-80 w-80 rounded-full bg-[#e7efe9] blur-3xl opacity-70" />
+    </div>
+
+    <section class="mx-auto max-w-6xl px-4 pb-20 pt-12 sm:px-6 lg:pt-16">
+      <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div class="flex flex-col gap-3">
+          <p class="text-xs font-semibold uppercase tracking-[0.3em] text-neutral-500">
+            Blog
+          </p>
+          <h1 class="text-3xl font-normal tracking-tight text-neutral-900 sm:text-4xl">
+            Najnovsie pribehy a skusenosti
+          </h1>
+        </div>
+        <p class="max-w-md text-sm leading-6 text-neutral-600">
+          Skusenosti, pribehy a lekcie zo sveta financii a budovania majetku.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:gap-10">
+        {cards.map(({ post, image, excerpt }) => (
+          <article class="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+            <div class="relative aspect-[4/3] w-full overflow-hidden">
+              {image ? (
+                <Image
+                  src={image}
+                  width={900}
+                  sizes="(min-width: 1024px) 420px, (min-width: 640px) 45vw, 100vw"
+                  alt={post.frontmatter?.image?.alt ?? post.frontmatter?.title}
+                  class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                />
+              ) : (
+                <div class="h-full w-full bg-gradient-to-br from-[#e9f4f4] to-[#f3f4f6]" />
+              )}
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-black/0 to-transparent" />
+            </div>
+
+            <div class="flex h-full flex-col gap-4 p-6">
+              <div class="flex items-center gap-3 text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-neutral-500">
+                <span class="text-accent">{formatDate(post.frontmatter?.pubDate)}</span>
+                <span class="h-1 w-1 rounded-full bg-neutral-300" />
+                <span>{post.frontmatter?.author ?? "ABM"}</span>
+              </div>
+              <h2 class="text-xl font-semibold leading-snug text-neutral-900">
+                <a
+                  href={post.url}
+                  class="text-neutral-900 no-underline transition-colors group-hover:text-accent"
+                >
+                  {post.frontmatter?.title}
+                </a>
+              </h2>
+              {excerpt && (
+                <p class="text-sm leading-6 text-neutral-600">{excerpt}</p>
+              )}
+              <a
+                href={post.url}
+                class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-accent no-underline hover:underline"
+              >
+                Citat prispevok
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>
