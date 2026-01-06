@@ -1,8 +1,35 @@
 ---
-import '../styles/global.css'
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-const { pageTitle } = Astro.props;
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Head from "../components/Head.astro";
+import AdBlock from "../components/AdBlock.astro";
+import { site } from "../data/site";
+
+const {
+  pageTitle,
+  pageDescription,
+  pageImage,
+  pageUrl,
+  ogType,
+  noIndex,
+} = Astro.props;
+const resolvedDescription = pageDescription || site.description;
+const resolvedImage = pageImage || site.image || undefined;
+const resolvedPath = pageUrl ?? Astro.url?.pathname;
+const baseUrl = site.url
+  ? site.url.startsWith("http://") || site.url.startsWith("https://")
+    ? site.url
+    : `https://${site.url}`
+  : "";
+const resolvedUrl =
+  baseUrl && resolvedPath ? new URL(resolvedPath, baseUrl).toString() : baseUrl || undefined;
+const imageValue =
+  typeof resolvedImage === "string" ? resolvedImage : resolvedImage?.src;
+const resolvedImageUrl =
+  imageValue && baseUrl && imageValue.startsWith("/")
+    ? new URL(imageValue, baseUrl).toString()
+    : imageValue;
 ---
 
 <html lang="en">
@@ -11,11 +38,21 @@ const { pageTitle } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Ako byť milionár | {pageTitle}</title>
+		<Head
+      title={pageTitle}
+      description={resolvedDescription}
+      image={resolvedImageUrl}
+      url={resolvedUrl}
+      siteName={site.title}
+      ogType={ogType}
+      noIndex={noIndex}
+    />
 	</head>
 	<body>
         <Header />
+       
         <slot />
+      
         <Footer />
         <button
           type="button"

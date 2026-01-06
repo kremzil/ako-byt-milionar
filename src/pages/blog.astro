@@ -1,8 +1,9 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
 
-const posts = await Astro.glob("./posts/*.md");
+const posts = await getCollection("blog");
 const blogImages = import.meta.glob("../assets/blog/*.{png,jpg,jpeg,webp,avif}", {
   eager: true,
 });
@@ -41,10 +42,10 @@ const resolveImage = (imageData) => {
 };
 
 const getExcerpt = (post) => {
-  const description = post.frontmatter?.description?.trim();
+  const description = post.data?.description?.trim();
   if (description) return description;
-  if (typeof post.rawContent !== "function") return "";
-  const raw = post.rawContent();
+  if (typeof post.body !== "string") return "";
+  const raw = post.body;
   const paragraph = raw.split(/\n\s*\n/).find((chunk) => chunk.trim());
   if (!paragraph) return "";
   return paragraph.replace(/\n/g, " ").trim().slice(0, 180);
@@ -53,14 +54,17 @@ const getExcerpt = (post) => {
 const cards = posts
   .map((post) => ({
     post,
-    image: resolveImage(post.frontmatter?.image),
+    image: resolveImage(post.data?.image),
     excerpt: getExcerpt(post),
-    date: getDate(post.frontmatter?.pubDate),
+    date: getDate(post.data?.pubDate),
   }))
   .sort((a, b) => (b.date?.getTime() ?? 0) - (a.date?.getTime() ?? 0));
 ---
 
-<BaseLayout pageTitle="Blog">
+<BaseLayout
+  pageTitle="Blog"
+  pageDescription="Skusenosti, pribehy a lekcie zo sveta financii a budovania majetku."
+>
   <main class="relative overflow-hidden surface">
     <div class="pointer-events-none absolute inset-0 -z-10">
       <div class="orb-1 absolute -left-20 top-10 h-64 w-64 rounded-full blur-3xl opacity-70" />
@@ -91,7 +95,7 @@ const cards = posts
                   src={image}
                   width={900}
                   sizes="(min-width: 1024px) 420px, (min-width: 640px) 45vw, 100vw"
-                  alt={post.frontmatter?.image?.alt ?? post.frontmatter?.title}
+                  alt={post.data?.image?.alt ?? post.data?.title}
                   class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                 />
               ) : (
@@ -102,23 +106,23 @@ const cards = posts
 
             <div class="flex h-full flex-col gap-4 p-6">
               <div class="eyebrow flex items-center gap-3 text-[0.7rem] text-neutral-500">
-                <span class="text-accent">{formatDate(post.frontmatter?.pubDate)}</span>
+                <span class="text-accent">{formatDate(post.data?.pubDate)}</span>
                 <span class="h-1 w-1 rounded-full bg-neutral-300" />
-                <span>{post.frontmatter?.author ?? "ABM"}</span>
+                <span>{post.data?.author ?? "ABM"}</span>
               </div>
               <h2 class="text-xl font-semibold leading-snug text-neutral-900">
                 <a
-                  href={post.url}
+                  href={`/posts/${post.id}/`}
                   class="text-neutral-900 no-underline transition-colors group-hover:text-accent"
                 >
-                  {post.frontmatter?.title}
+                  {post.data?.title}
                 </a>
               </h2>
               {excerpt && (
                 <p class="text-sm leading-6 text-neutral-600">{excerpt}</p>
               )}
               <a
-                href={post.url}
+                href={`/posts/${post.id}/`}
                 class="link-accent mt-auto inline-flex items-center gap-2 text-sm font-semibold"
               >
                 Citat prispevok

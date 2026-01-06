@@ -1,11 +1,10 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Peter Paško – technologický inovátor a mecenáš kultúry'
-pubDate: 04-09-2025
-description: 
+pubDate: 2025-09-04
 author: 'ABM'
+description: "Profil Petra Paška, spoluzakladateľa ESET-u, technologického inovátora a mecenáša kultúry. Príbeh nenápadného lídra, ktorý stál pri zrode jedného z najúspešnejších IT firiem v strednej Európe."
 image:
-  src: "pasko.webp"
+  url: "pasko.webp"
   alt: "Peter Paško"
 ---
 

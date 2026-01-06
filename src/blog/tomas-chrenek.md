@@ -1,11 +1,10 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Tomáš Chrenek – muž, ktorý zo železa postavil zdravotnícke impérium'
-pubDate: 03-09-2025
-description: 
+pubDate: 2025-09-03
 author: 'ABM'
+description: "Profil Tomáša Chreneka, podnikateľa, ktorý vybudoval miliardové impérium v hutníctve a neskôr ovládol aj zdravotníctvo. Príbeh muža stojaceho za Moravia Steel a skupinou AGEL."
 image:
-  src: "chrenek.png"
+  url: "chrenek.png"
   alt: "Tomáš Chrenek"
 ---
 

@@ -14,13 +14,39 @@ const imageKey = imagePath?.startsWith("../assets/")
     : null;
 const imageModule = imageKey ? blogImages[imageKey] : null;
 const image = imageModule?.default ?? null;
+const pageDescription = frontmatter.description?.trim() || undefined;
+const pageImage = image?.src;
+const pageUrl = Astro.url?.pathname;
+
+const getDate = (value) => {
+  if (!value) return null;
+  if (value instanceof Date) return value;
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+};
+
+const formatDate = (value) => {
+  const parsed = getDate(value);
+  if (!parsed) return value ? String(value) : "";
+  return new Intl.DateTimeFormat("sk-SK", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(parsed);
+};
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
+<BaseLayout
+  pageTitle={frontmatter.title}
+  pageDescription={pageDescription}
+  pageImage={pageImage}
+  pageUrl={pageUrl}
+  ogType="article"
+>
   <main class="surface pt-20 pb-16">
     <article class="card mx-auto max-w-170 px-4 pb-12 pt-10 sm:px-6 sm:pb-16 lg:pt-16">
       <div class="eyebrow text-xs text-neutral-500">
-        {frontmatter.pubDate.toString().slice(0, 10)}
+        {formatDate(frontmatter.pubDate)}
       </div>
       <h1 class="mt-4 text-4xl font-normal tracking-tight text-neutral-900 sm:text-5xl">
         {frontmatter.title}

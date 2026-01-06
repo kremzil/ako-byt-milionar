@@ -1,11 +1,10 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
 title: 'Martin Kúšik – muž, ktorý odišiel z Penty a vybudoval vlastné impérium'
-pubDate: 03-09-2025
-description: 
+pubDate: 2025-09-03
 author: 'ABM'
+description: "Príbeh Martina Kúšika, spoluzakladateľa Penty, ktorý po odchode zo skupiny vybudoval vlastné investičné impérium. Profil tichého investora zameraného na dlhodobé hodnoty a nezávislosť."
 image:
-  src: "kusik.webp"
+  url: "kusik.webp"
   alt: "Martin Kúšik"
 ---
 Martin Kúšik patrí k zakladateľom Penty, no v roku 2013 zo skupiny odišiel a vydal sa vlastnou cestou. Aj napriek tomu si udržal miesto medzi najbohatšími Slovákmi s majetkom okolo 580 miliónov eur.

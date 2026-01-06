@@ -1,0 +1,38 @@
+---
+const {
+  title,
+  description,
+  image,
+  url,
+  siteName,
+  ogType = "website",
+  noIndex = false,
+} = Astro.props;
+
+const metaTitle =
+  title && siteName ? `${title} | ${siteName}` : title || siteName || "";
+const metaDescription = description || "";
+const metaImage = image || "";
+const metaUrl = url || "";
+const twitterCard = metaImage ? "summary_large_image" : "summary";
+---
+
+{metaTitle && <title>{metaTitle}</title>}
+{metaDescription && <meta name="description" content={metaDescription} />}
+{noIndex && <meta name="robots" content="noindex" />}
+{metaUrl && <link rel="canonical" href={metaUrl} />}
+
+{metaTitle && <meta property="og:title" content={metaTitle} />}
+{metaDescription && <meta property="og:description" content={metaDescription} />}
+{metaUrl && <meta property="og:url" content={metaUrl} />}
+{ogType && <meta property="og:type" content={ogType} />}
+{siteName && <meta property="og:site_name" content={siteName} />}
+{metaImage && <meta property="og:image" content={metaImage} />}
+
+<meta name="twitter:card" content={twitterCard} />
+{metaTitle && <meta name="twitter:title" content={metaTitle} />}
+{metaDescription && <meta name="twitter:description" content={metaDescription} />}
+{metaImage && <meta name="twitter:image" content={metaImage} />}
+<link rel="sitemap" href="/sitemap-index.xml" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5021148600057738"
+     crossorigin="anonymous"></script>
