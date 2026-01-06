@@ -6,6 +6,6 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   { label: "Domov", href: "/" },
   { label: "Kalkulačka zloženého úročenia", href: "#kalkulacka" },
-  { label: "O nás", href: "/about" },
+  { label: "O nás", href: "/o-nas" },
   { label: "Blog", href: "/blog" }
 ];
