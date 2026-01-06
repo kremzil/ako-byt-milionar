@@ -3,17 +3,90 @@ import { getCollection, render } from "astro:content";
 import MarkdownPostLayout from "../../layouts/MarkdownPostLayout.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { post },
-  }));
+  const getDate = (value) => {
+    if (!value) return null;
+    if (value instanceof Date) return value;
+    const raw = String(value);
+    const parts = raw.split("-");
+    if (parts.length === 3 && parts[0].length <= 2) {
+      const [day, month, year] = parts;
+      return new Date(`${year}-${month}-${day}`);
+    }
+    const parsed = new Date(raw);
+    return Number.isNaN(parsed.getTime()) ? null : parsed;
+  };
+
+  const scoreRelated = (currentPost, posts, count = 2) => {
+    const currentTags = new Set(currentPost.data?.tags ?? []);
+    const otherPosts = posts.filter((post) => post.id !== currentPost.id);
+    if (otherPosts.length <= count) return otherPosts.slice(0, count);
+
+    const scored = otherPosts.map((post) => {
+      const tags = post.data?.tags ?? [];
+      let score = 0;
+      for (const tag of tags) {
+        if (currentTags.has(tag)) score += 1;
+      }
+      return { post, score };
+    });
+
+    scored.sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      const dateA = getDate(a.post.data?.pubDate)?.getTime() ?? 0;
+      const dateB = getDate(b.post.data?.pubDate)?.getTime() ?? 0;
+      return dateB - dateA;
+    });
+
+    const related = [];
+    const relatedIds = new Set();
+
+    for (const item of scored) {
+      if (item.score <= 0) continue;
+      related.push(item.post);
+      relatedIds.add(item.post.id);
+      if (related.length >= count) break;
+    }
+
+    if (related.length < count) {
+      for (const item of scored) {
+        if (relatedIds.has(item.post.id)) continue;
+        related.push(item.post);
+        relatedIds.add(item.post.id);
+        if (related.length >= count) break;
+      }
+    }
+
+    return related;
+  };
+
+  const allPosts = await getCollection("blog");
+  const sortedPosts = [...allPosts].sort((a, b) => {
+    const dateA = getDate(a.data?.pubDate)?.getTime() ?? 0;
+    const dateB = getDate(b.data?.pubDate)?.getTime() ?? 0;
+    return dateB - dateA;
+  });
+
+  return sortedPosts.map((post, index) => {
+    const prevPost = index > 0 ? sortedPosts[index - 1] : null;
+    const nextPost = index < sortedPosts.length - 1 ? sortedPosts[index + 1] : null;
+    const relatedPosts = scoreRelated(post, sortedPosts, 2);
+
+    return {
+      params: { slug: post.id },
+      props: { post, prevPost, nextPost, relatedPosts },
+    };
+  });
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost, relatedPosts } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<MarkdownPostLayout frontmatter={post.data}>
+<MarkdownPostLayout
+  frontmatter={post.data}
+  prevPost={prevPost}
+  nextPost={nextPost}
+  relatedPosts={relatedPosts}
+>
   <Content />
 </MarkdownPostLayout>
