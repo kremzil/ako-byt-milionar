@@ -36,4 +36,28 @@
   .surface-alt { background-color: var(--color-surface-alt); }
   .orb-1 { background-color: var(--color-orb-1); }
   .orb-2 { background-color: var(--color-orb-2); }
+    .share-nav {
+    @apply flex md:flex-col gap-4 w-fit absolute -top-10 md:left-full md:top-0 md:ml-4;
+  }
+
+  .share-nav > a {
+    @apply inline-flex items-center justify-between
+           rounded-md md:rounded-xl px-2 py-2 md:px-3 md:py-3
+           text-sm font-semibold
+           bg-white ring-1 ring-black/10 shadow-sm
+           transition
+           no-underline hover:no-underline;
+  }
+
+  .share-nav > a:hover {
+    @apply bg-neutral-50
+            translate-y-0.5;
+  }
+
+  .share-nav > a:focus-visible {
+    @apply outline-none ring-2 ring-accent/50;
+  }
+    .share-icon {
+    @apply size-4 shrink-0 opacity-80;
+  }
 }
